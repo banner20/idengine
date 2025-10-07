@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muse - Music Creation Companion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Home Dashboard -->
+        <div id="home-screen" class="screen active">
+            <header>
+                <h1>DASHBOARD</h1>
+                <button class="play-mode-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </svg>
+                    <span>PLAY MODE</span>
+                </button>
+            </header>
+
+            <div class="content">
+                <section class="daily-challenge">
+                    <h2 class="section-title">CHALLENGES</h2>
+                    
+                    <div class="challenge-carousel" id="challengeCarousel">
+                        <div class="challenge-card active">
+                            <div class="challenge-status active">● ACTIVE</div>
+                            <div class="challenge-type">SOUND PACK EXPLORATION</div>
+                            <h3 class="challenge-title">Analog Drift Vol.3</h3>
+                            <p class="challenge-description">
+                                Build a 16-bar loop using tape-saturated samples from the Analog Drift collection. Minimum 3 layers.
+                            </p>
+                            <div class="challenge-stats">
+                                <span>⏱️ 2 DAYS LEFT</span>
+                                <span>👥 342 ENTRIES</span>
+                            </div>
+                            <div class="challenge-actions">
+                                <button class="btn-primary jam-btn" onclick="startJam(5)">
+                                    ▶ START JAMMING
+                                </button>
+                                <button class="btn-secondary jam-btn" onclick="playChallengeSample()">
+                                    🔊 PLAY SAMPLE
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="challenge-card">
+                            <div class="challenge-status inactive">○ UPCOMING</div>
+                            <div class="challenge-type">SAMPLE DECONSTRUCTION</div>
+                            <h3 class="challenge-title">Vinyl Archaeology #12</h3>
+                            <p class="challenge-description">
+                                Deconstruct a 1974 jazz recording into something unrecognizable. Pitch, time-stretch, destroy.
+                            </p>
+                            <div class="challenge-stats">
+                                <span>⏱️ STARTS IN 3 DAYS</span>
+                                <span>🎵 1 RARE SAMPLE PROVIDED</span>
+                            </div>
+                            <div class="challenge-actions">
+                                <button class="btn-secondary jam-btn">
+                                    👁️ PREVIEW
+                                </button>
+                                <button class="btn-secondary jam-btn" onclick="playChallengeSample()">
+                                    🔊 PLAY SAMPLE
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="challenge-card">
+                            <div class="challenge-status active">● ACTIVE</div>
+                            <div class="challenge-type">TIMED EXPERIMENT</div>
+                            <h3 class="challenge-title">300 Seconds: No Edits</h3>
+                            <p class="challenge-description">
+                                5 minutes. One take. No undo. Capture the imperfect magic of real-time creation.
+                            </p>
+                            <div class="challenge-stats">
+                                <span>⏱️ 1 DAY LEFT</span>
+                                <span>👥 567 ENTRIES</span>
+                            </div>
+                            <div class="challenge-actions">
+                                <button class="btn-primary jam-btn" onclick="startJam(5)">
+                                    ▶ START JAMMING
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-dots">
+                        <span class="dot active"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                </section>
+
+                <section class="progress-overview">
+                    <h2 class="section-title">YOUR PROGRESS</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-label">STREAK</div>
+                            <div class="stat-value">3 <span class="stat-unit">days</span></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">LOOPS CREATED</div>
+                            <div class="stat-value">12</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">TIME SPENT</div>
+                            <div class="stat-value">2h 30m</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">LOOPS SHARED</div>
+                            <div class="stat-value">5</div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Progress Screen -->
+        <div id="progress-screen" class="screen">
+            <header>
+                <h1>PROGRESS</h1>
+                <button class="play-mode-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </svg>
+                    <span>PLAY MODE</span>
+                </button>
+            </header>
+
+            <div class="content">
+                <!-- Streak Section -->
+                <section class="streak-section">
+                    <div class="streak-display">
+                        <div class="fire-icon">🔥</div>
+                        <div class="streak-number">3</div>
+                        <div class="streak-text">Day Streak</div>
+                        <div class="milestone-text">7 MORE DAYS TO YOUR NEXT MILESTONE</div>
+                    </div>
+                    <div class="streak-calendar">
+                        <div class="calendar-day active">M</div>
+                        <div class="calendar-day active">T</div>
+                        <div class="calendar-day active">W</div>
+                        <div class="calendar-day">T</div>
+                        <div class="calendar-day">F</div>
+                        <div class="calendar-day">S</div>
+                        <div class="calendar-day">S</div>
+                    </div>
+                </section>
+
+                <!-- Weekly Stats -->
+                <section class="weekly-stats">
+                    <h2 class="section-title">THIS WEEK</h2>
+                    <div class="weekly-grid">
+                        <div class="weekly-stat">
+                            <div class="stat-icon">👁️</div>
+                            <div class="stat-info">
+                                <div class="stat-big">247</div>
+                                <div class="stat-label-small">VIEWS</div>
+                            </div>
+                        </div>
+                        <div class="weekly-stat">
+                            <div class="stat-icon">🎵</div>
+                            <div class="stat-info">
+                                <div class="stat-big">7</div>
+                                <div class="stat-label-small">LOOPS MADE</div>
+                            </div>
+                        </div>
+                        <div class="weekly-stat">
+                            <div class="stat-icon">🏆</div>
+                            <div class="stat-info">
+                                <div class="stat-big">5</div>
+                                <div class="stat-label-small">BADGES EARNED</div>
+                            </div>
+                        </div>
+                        <div class="weekly-stat">
+                            <div class="stat-icon">❤️</div>
+                            <div class="stat-info">
+                                <div class="stat-big">89</div>
+                                <div class="stat-label-small">LIKES</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Activity Breakdown -->
+                <section class="progress-meters">
+                    <h2 class="section-title">ACTIVITY BREAKDOWN</h2>
+                    
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <span class="progress-label">JAM TIME THIS WEEK</span>
+                            <span class="progress-value">2h 47m</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 73%"></div>
+                        </div>
+                        <div class="progress-subtext">GOAL: 4H • 73% COMPLETE</div>
+                    </div>
+
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <span class="progress-label">SOUND PACKS EXPLORED</span>
+                            <span class="progress-value">4/12</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 33%"></div>
+                        </div>
+                        <div class="progress-subtext">8 MORE TO UNLOCK ALL PACKS</div>
+                    </div>
+
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <span class="progress-label">AVG LOOP LENGTH</span>
+                            <span class="progress-value">1:43</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 57%"></div>
+                        </div>
+                        <div class="progress-subtext">+0:15 LONGER THAN LAST WEEK</div>
+                    </div>
+
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <span class="progress-label">CHALLENGE COMPLETION</span>
+                            <span class="progress-value">8/12</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 67%"></div>
+                        </div>
+                        <div class="progress-subtext">TOP 15% OF ALL USERS</div>
+                    </div>
+                </section>
+
+                <!-- Recent Challenges -->
+                <section class="recent-challenges">
+                    <h2 class="section-title">RECENT CHALLENGES</h2>
+                    
+                    <div class="challenge-history-item">
+                        <div class="challenge-history-status active">●</div>
+                        <div class="challenge-history-info">
+                            <div class="challenge-history-name">Analog Drift Vol.3</div>
+                            <div class="challenge-history-time">IN PROGRESS • 2 DAYS LEFT</div>
+                        </div>
+                        <div class="challenge-history-score">--</div>
+                    </div>
+
+                    <div class="challenge-history-item">
+                        <div class="challenge-history-status completed">✓</div>
+                        <div class="challenge-history-info">
+                            <div class="challenge-history-name">Polyrhythmic Meditation</div>
+                            <div class="challenge-history-time">COMPLETED • 3 DAYS AGO</div>
+                        </div>
+                        <div class="challenge-history-score">#47</div>
+                    </div>
+
+                    <div class="challenge-history-item">
+                        <div class="challenge-history-status completed">✓</div>
+                        <div class="challenge-history-info">
+                            <div class="challenge-history-name">Microsampling: 0.5s Max</div>
+                            <div class="challenge-history-time">COMPLETED • 1 WEEK AGO</div>
+                        </div>
+                        <div class="challenge-history-score">#122</div>
+                    </div>
+                </section>
+
+                <!-- Badges -->
+                <section class="badges-section">
+                    <h2 class="section-title">BADGES (5/12)</h2>
+                    <div class="badges-grid">
+                        <div class="badge earned">
+                            <div class="badge-icon">⚡</div>
+                            <div class="badge-name">Quick Start</div>
+                        </div>
+                        <div class="badge earned">
+                            <div class="badge-icon">🎵</div>
+                            <div class="badge-name">First Loop</div>
+                        </div>
+                        <div class="badge earned">
+                            <div class="badge-icon">🔥</div>
+                            <div class="badge-name">3 Day Streak</div>
+                        </div>
+                        <div class="badge earned">
+                            <div class="badge-icon">🎧</div>
+                            <div class="badge-name">Social Star</div>
+                        </div>
+                        <div class="badge earned">
+                            <div class="badge-icon">🌟</div>
+                            <div class="badge-name">Rising Artist</div>
+                        </div>
+                        <div class="badge locked">
+                            <div class="badge-icon">👥</div>
+                            <div class="badge-name">Collaborator</div>
+                        </div>
+                        <div class="badge locked">
+                            <div class="badge-icon">🏆</div>
+                            <div class="badge-name">Challenge Master</div>
+                        </div>
+                        <div class="badge locked">
+                            <div class="badge-icon">💎</div>
+                            <div class="badge-name">Pro Producer</div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Community Feed -->
+        <div id="community-screen" class="screen">
+            <header>
+                <h1>COMMUNITY</h1>
+                <button class="play-mode-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </svg>
+                    <span>PLAY MODE</span>
+                </button>
+            </header>
+
+            <div class="community-filters">
+                <button class="filter-btn active">🔥 TRENDING</button>
+                <button class="filter-btn">⏰ LATEST</button>
+                <button class="filter-btn">❤️ TOP LIKED</button>
+                <button class="filter-btn">🔄 REMIXES</button>
+            </div>
+
+            <div class="content feed-content">
+                <div class="feed-post">
+                    <div class="post-header">
+                        <div class="user-avatar">K</div>
+                        <div class="user-info">
+                            <div class="username">@kai_beats</div>
+                            <div class="post-time">2h ago • 1:32</div>
+                        </div>
+                    </div>
+                    <div class="post-title">3AM Tape Hiss & Reverb Dreams</div>
+                    <div class="post-tags">
+                        <span class="tag">#TAPELOOP</span>
+                        <span class="tag">#SATURATED</span>
+                        <span class="tag">#AMBIENT</span>
+                    </div>
+                    <div class="waveform">
+                        <div class="wave-bar" style="height: 40%"></div>
+                        <div class="wave-bar" style="height: 70%"></div>
+                        <div class="wave-bar" style="height: 55%"></div>
+                        <div class="wave-bar" style="height: 85%"></div>
+                        <div class="wave-bar" style="height: 60%"></div>
+                        <div class="wave-bar" style="height: 45%"></div>
+                        <div class="wave-bar" style="height: 75%"></div>
+                        <div class="wave-bar" style="height: 50%"></div>
+                        <div class="wave-bar" style="height: 65%"></div>
+                        <div class="wave-bar" style="height: 80%"></div>
+                        <div class="wave-bar" style="height: 55%"></div>
+                        <div class="wave-bar" style="height: 70%"></div>
+                        <div class="wave-bar" style="height: 45%"></div>
+                        <div class="wave-bar" style="height: 60%"></div>
+                        <div class="wave-bar" style="height: 75%"></div>
+                        <div class="wave-bar" style="height: 50%"></div>
+                        <div class="wave-bar" style="height: 85%"></div>
+                        <div class="wave-bar" style="height: 65%"></div>
+                        <div class="wave-bar" style="height: 40%"></div>
+                        <div class="wave-bar" style="height: 70%"></div>
+                    </div>
+                    <div class="post-meta">
+                        <span class="post-views">👁️ 3.2K PLAYS</span>
+                    </div>
+                    <div class="post-actions">
+                        <button class="action-btn">
+                            <span>❤️</span> 247
+                        </button>
+                        <button class="action-btn">
+                            <span>💬</span> 18
+                        </button>
+                        <button class="action-btn remix">
+                            <span>🔄</span> REMIX
+                        </button>
+                    </div>
+                </div>
+
+                <div class="feed-post">
+                    <div class="post-header">
+                        <div class="user-avatar">M</div>
+                        <div class="user-info">
+                            <div class="username">@maya_music</div>
+                            <div class="post-time">5h ago • 2:14</div>
+                        </div>
+                    </div>
+                    <div class="post-title">Broken Rhodes in Eb Minor</div>
+                    <div class="post-tags">
+                        <span class="tag">#KEYS</span>
+                        <span class="tag">#DETUNED</span>
+                        <span class="tag">#JAZZFUNK</span>
+                    </div>
+                    <div class="waveform">
+                        <div class="wave-bar" style="height: 65%"></div>
+                        <div class="wave-bar" style="height: 80%"></div>
+                        <div class="wave-bar" style="height: 45%"></div>
+                        <div class="wave-bar" style="height: 90%"></div>
+                        <div class="wave-bar" style="height: 55%"></div>
+                        <div class="wave-bar" style="height: 70%"></div>
+                        <div class="wave-bar" style="height: 85%"></div>
+                        <div class="wave-bar" style="height: 60%"></div>
+                        <div class="wave-bar" style="height: 75%"></div>
+                        <div class="wave-bar" style="height: 50%"></div>
+                        <div class="wave-bar" style="height: 65%"></div>
+                        <div class="wave-bar" style="height: 80%"></div>
+                        <div class="wave-bar" style="height: 55%"></div>
+                        <div class="wave-bar" style="height: 70%"></div>
+                        <div class="wave-bar" style="height: 45%"></div>
+                        <div class="wave-bar" style="height: 85%"></div>
+                        <div class="wave-bar" style="height: 60%"></div>
+                        <div class="wave-bar" style="height: 75%"></div>
+                        <div class="wave-bar" style="height: 50%"></div>
+                        <div class="wave-bar" style="height: 65%"></div>
+                    </div>
+                    <div class="post-meta">
+                        <span class="post-views">👁️ 1.8K PLAYS</span>
+                    </div>
+                    <div class="post-actions">
+                        <button class="action-btn">
+                            <span>❤️</span> 189
+                        </button>
+                        <button class="action-btn">
+                            <span>💬</span> 12
+                        </button>
+                        <button class="action-btn remix">
+                            <span>🔄</span> REMIX
+                        </button>
+                    </div>
+                </div>
+
+                <div class="feed-post">
+                    <div class="post-header">
+                        <div class="user-avatar">R</div>
+                        <div class="user-info">
+                            <div class="username">@rhythm_rider</div>
+                            <div class="post-time">8h ago • 3:45</div>
+                        </div>
+                    </div>
+                    <div class="post-title">Granular Synthesis Study No.4</div>
+                    <div class="post-tags">
+                        <span class="tag">#GRANULAR</span>
+                        <span class="tag">#TEXTURES</span>
+                        <span class="tag">#DRONE</span>
+                    </div>
+                    <div class="waveform">
+                        <div class="wave-bar" style="height: 35%"></div>
+                        <div class="wave-bar" style="height: 50%"></div>
+                        <div class="wave-bar" style="height: 45%"></div>
+                        <div class="wave-bar" style="height: 60%"></div>
+                        <div class="wave-bar" style="height: 40%"></div>
+                        <div class="wave-bar" style="height: 55%"></div>
+                        <div class="wave-bar" style="height: 65%"></div>
+                        <div class="wave-bar" style="height: 50%"></div>
+                        <div class="wave-bar" style="height: 45%"></div>
+                        <div class="wave-bar" style="height: 70%"></div>
+                        <div class="wave-bar" style="height: 55%"></div>
+                        <div class="wave-bar" style="height: 60%"></div>
+                        <div class="wave-bar" style="height: 45%"></div>
+                        <div class="wave-bar" style="height: 50%"></div>
+                        <div class="wave-bar" style="height: 65%"></div>
+                        <div class="wave-bar" style="height: 55%"></div>
+                        <div class="wave-bar" style="height: 70%"></div>
+                        <div class="wave-bar" style="height: 45%"></div>
+                        <div class="wave-bar" style="height: 40%"></div>
+                        <div class="wave-bar" style="height: 55%"></div>
+                    </div>
+                    <div class="post-meta">
+                        <span class="post-views">👁️ 5.1K PLAYS</span>
+                    </div>
+                    <div class="post-actions">
+                        <button class="action-btn">
+                            <span>❤️</span> 312
+                        </button>
+                        <button class="action-btn">
+                            <span>💬</span> 24
+                        </button>
+                        <button class="action-btn remix">
+                            <span>🔄</span> REMIX
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Challenges Screen -->
+        <div id="challenges-screen" class="screen">
+            <header>
+                <h1>CHALLENGES</h1>
+                <button class="play-mode-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </svg>
+                    <span>PLAY MODE</span>
+                </button>
+            </header>
+
+            <div class="content">
+                <!-- Featured Challenge -->
+                <section class="featured-challenge">
+                    <div class="featured-badge">⭐ FEATURED</div>
+                    <h2 class="featured-title">FIELD RECORDINGS ONLY</h2>
+                    <p class="featured-description">
+                        No synthesizers. No drum machines. Build your entire track from real-world recordings. Traffic, rain, footsteps, broken glass.
+                    </p>
+                    <div class="featured-stats">
+                        <div class="featured-stat">
+                            <div class="featured-stat-value">2</div>
+                            <div class="featured-stat-label">DAYS LEFT</div>
+                        </div>
+                        <div class="featured-stat">
+                            <div class="featured-stat-value">1,247</div>
+                            <div class="featured-stat-label">PARTICIPANTS</div>
+                        </div>
+                        <div class="featured-stat">
+                            <div class="featured-stat-value">892</div>
+                            <div class="featured-stat-label">SUBMISSIONS</div>
+                        </div>
+                    </div>
+                    <div class="featured-actions">
+                        <button class="btn-primary">JOIN CHALLENGE</button>
+                        <button class="btn-secondary">VIEW SUBMISSIONS</button>
+                    </div>
+                </section>
+
+                <section class="active-challenges">
+                    <h2 class="section-title">ACTIVE CHALLENGES</h2>
+                    
+                    <div class="challenge-item">
+                        <div class="challenge-info">
+                            <div class="challenge-name">Polyrhythmic Meditation</div>
+                            <div class="challenge-prompt">Layer 3+ time signatures into one cohesive groove</div>
+                            <div class="challenge-meta">
+                                <span>⏱️ 2 days left</span>
+                                <span>👥 342 participants</span>
+                                <span>📤 289 submissions</span>
+                            </div>
+                        </div>
+                        <button class="btn-small">JOIN</button>
+                    </div>
+
+                    <div class="challenge-item">
+                        <div class="challenge-info">
+                            <div class="challenge-name">Cassette Archaeology #8</div>
+                            <div class="challenge-prompt">Sample from a degraded 90s cassette recording</div>
+                            <div class="challenge-meta">
+                                <span>⏱️ 5 days left</span>
+                                <span>👥 189 participants</span>
+                                <span>📤 134 submissions</span>
+                            </div>
+                        </div>
+                        <button class="btn-small">JOIN</button>
+                    </div>
+
+                    <div class="challenge-item">
+                        <div class="challenge-info">
+                            <div class="challenge-name">Microsampling: 0.5s Max</div>
+                            <div class="challenge-prompt">Build a beat using only samples under half a second</div>
+                            <div class="challenge-meta">
+                                <span>⏱️ 1 week left</span>
+                                <span>👥 567 participants</span>
+                                <span>📤 401 submissions</span>
+                            </div>
+                        </div>
+                        <button class="btn-small">JOIN</button>
+                    </div>
+                </section>
+
+                <section class="leaderboard">
+                    <div class="section-header">
+                        <h2 class="section-title">LEADERBOARD - THIS WEEK</h2>
+                        <button class="view-all-btn">VIEW ALL →</button>
+                    </div>
+                    
+                    <div class="leaderboard-item rank-1">
+                        <div class="rank">1</div>
+                        <div class="user-avatar small">B</div>
+                        <div class="user-details">
+                            <div class="username">@beat_wizard</div>
+                            <div class="user-stat">1,247 pts</div>
+                        </div>
+                    </div>
+
+                    <div class="leaderboard-item rank-2">
+                        <div class="rank">2</div>
+                        <div class="user-avatar small">S</div>
+                        <div class="user-details">
+                            <div class="username">@synth_sage</div>
+                            <div class="user-stat">1,089 pts</div>
+                        </div>
+                    </div>
+
+                    <div class="leaderboard-item rank-3">
+                        <div class="rank">3</div>
+                        <div class="user-avatar small">L</div>
+                        <div class="user-details">
+                            <div class="username">@loop_master</div>
+                            <div class="user-stat">967 pts</div>
+                        </div>
+                    </div>
+
+                    <div class="leaderboard-item">
+                        <div class="rank">12</div>
+                        <div class="user-avatar small you">Y</div>
+                        <div class="user-details">
+                            <div class="username">@you</div>
+                            <div class="user-stat">456 pts</div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Profile Screen -->
+        <div id="profile-screen" class="screen">
+            <header>
+                <h1>PROFILE</h1>
+                <button class="play-mode-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </svg>
+                    <span>PLAY MODE</span>
+                </button>
+            </header>
+
+            <div class="content">
+                <section class="profile-header">
+                    <div class="profile-avatar">YOU</div>
+                    <div class="profile-name">@your_username</div>
+                    <div class="profile-bio">Learning one beat at a time 🎵</div>
+                    <button class="btn-secondary profile-edit">EDIT PROFILE</button>
+                </section>
+
+                <section class="profile-stats">
+                    <div class="profile-stat">
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">Loops</div>
+                    </div>
+                    <div class="profile-stat">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">Remixes</div>
+                    </div>
+                    <div class="profile-stat">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Day Streak</div>
+                    </div>
+                    <div class="profile-stat">
+                        <div class="stat-number">487</div>
+                        <div class="stat-label">Followers</div>
+                    </div>
+                </section>
+
+                <section class="profile-tabs">
+                    <button class="tab-btn active" onclick="switchTab('loops')">YOUR LOOPS</button>
+                    <button class="tab-btn" onclick="switchTab('remixes')">REMIXES</button>
+                </section>
+
+                <section class="profile-content">
+                    <div id="loops-tab" class="tab-content active">
+                        <div class="loop-list">
+                            <div class="loop-item">
+                                <div class="loop-item-waveform"></div>
+                                <div class="loop-item-info">
+                                    <div class="loop-item-title">Dusty SP-404 Meditation</div>
+                                    <div class="loop-item-time">2 DAYS AGO</div>
+                                    <div class="loop-item-stats">
+                                        <span>❤️ 47</span>
+                                        <span>▶️ 892</span>
+                                        <span>🔄 3</span>
+                                    </div>
+                                </div>
+                                <button class="loop-play-btn">▶</button>
+                            </div>
+                            
+                            <div class="loop-item">
+                                <div class="loop-item-waveform"></div>
+                                <div class="loop-item-info">
+                                    <div class="loop-item-title">Overdriven 808 at 96BPM</div>
+                                    <div class="loop-item-time">3 DAYS AGO</div>
+                                    <div class="loop-item-stats">
+                                        <span>❤️ 63</span>
+                                        <span>▶️ 1.2K</span>
+                                        <span>🔄 5</span>
+                                    </div>
+                                </div>
+                                <button class="loop-play-btn">▶</button>
+                            </div>
+
+                            <div class="loop-item">
+                                <div class="loop-item-waveform"></div>
+                                <div class="loop-item-info">
+                                    <div class="loop-item-title">Sunday Rain Texture Study</div>
+                                    <div class="loop-item-time">5 DAYS AGO</div>
+                                    <div class="loop-item-stats">
+                                        <span>❤️ 52</span>
+                                        <span>▶️ 743</span>
+                                        <span>🔄 2</span>
+                                    </div>
+                                </div>
+                                <button class="loop-play-btn">▶</button>
+                            </div>
+
+                            <div class="loop-item">
+                                <div class="loop-item-waveform"></div>
+                                <div class="loop-item-info">
+                                    <div class="loop-item-title">Pitched Vocal Chops in Am</div>
+                                    <div class="loop-item-time">1 WEEK AGO</div>
+                                    <div class="loop-item-stats">
+                                        <span>❤️ 38</span>
+                                        <span>▶️ 567</span>
+                                        <span>🔄 1</span>
+                                    </div>
+                                </div>
+                                <button class="loop-play-btn">▶</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="remixes-tab" class="tab-content">
+                        <div class="loop-list">
+                            <div class="loop-item">
+                                <div class="loop-item-waveform"></div>
+                                <div class="loop-item-info">
+                                    <div class="loop-item-title">RMX: Broken Rhodes → Glitch</div>
+                                    <div class="loop-item-time">4 DAYS AGO</div>
+                                    <div class="loop-item-stats">
+                                        <span>❤️ 82</span>
+                                        <span>▶️ 1.5K</span>
+                                        <span>🔄 7</span>
+                                    </div>
+                                </div>
+                                <button class="loop-play-btn">▶</button>
+                            </div>
+
+                            <div class="loop-item">
+                                <div class="loop-item-waveform"></div>
+                                <div class="loop-item-info">
+                                    <div class="loop-item-title">RMX: Tape Hiss → Dub Techno</div>
+                                    <div class="loop-item-time">1 WEEK AGO</div>
+                                    <div class="loop-item-stats">
+                                        <span>❤️ 71</span>
+                                        <span>▶️ 1.1K</span>
+                                        <span>🔄 4</span>
+                                    </div>
+                                </div>
+                                <button class="loop-play-btn">▶</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <button class="nav-btn active" onclick="switchScreen('home')">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                </svg>
+                <span>HOME</span>
+            </button>
+            <button class="nav-btn" onclick="switchScreen('progress')">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                </svg>
+                <span>PROGRESS</span>
+            </button>
+            <button class="nav-btn" onclick="switchScreen('community')">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+                <span>COMMUNITY</span>
+            </button>
+            <button class="nav-btn" onclick="switchScreen('challenges')">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                    <path d="M4 22h16"></path>
+                    <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+                    <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+                    <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+                </svg>
+                <span>CHALLENGES</span>
+            </button>
+            <button class="nav-btn" onclick="switchScreen('profile')">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span>PROFILE</span>
+            </button>
+        </nav>
+
+        <!-- Jam Modal -->
+        <div id="jam-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>JAM SESSION</h2>
+                    <button class="close-btn" onclick="closeModal()">×</button>
+                </div>
+                <div class="timer-display">
+                    <div class="timer" id="timer">5:00</div>
+                    <div class="timer-label">REMAINING</div>
+                </div>
+                <div class="jam-instructions">
+                    Open your Muse hardware device and start creating!
+                    The timer will sync automatically when you begin.
+                </div>
+                <button class="btn-primary" onclick="closeModal()">END SESSION</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
