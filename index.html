@@ -28,7 +28,7 @@
                     <h2 class="section-title">CHALLENGES</h2>
                     
                     <div class="challenge-carousel" id="challengeCarousel">
-                        <div class="challenge-card active">
+                        <div class="challenge-card active" onclick="openChallengeDetail('analog-drift', this)">
                             <div class="challenge-status active">● ACTIVE</div>
                             <div class="challenge-type">SOUND PACK EXPLORATION</div>
                             <h3 class="challenge-title">Analog Drift Vol.3</h3>
@@ -40,16 +40,16 @@
                                 <span>👥 342 ENTRIES</span>
                             </div>
                             <div class="challenge-actions">
-                                <button class="btn-primary jam-btn" onclick="startJam(5)">
+                                <button class="btn-primary jam-btn" onclick="event.stopPropagation(); startJam(5)">
                                     ▶ START JAMMING
                                 </button>
-                                <button class="btn-secondary jam-btn" onclick="playChallengeSample()">
+                                <button class="btn-secondary jam-btn" onclick="event.stopPropagation(); playChallengeSample()">
                                     🔊 PLAY SAMPLE
                                 </button>
                             </div>
                         </div>
 
-                        <div class="challenge-card">
+                        <div class="challenge-card" onclick="openChallengeDetail('vinyl-archaeology', this)">
                             <div class="challenge-status inactive">○ UPCOMING</div>
                             <div class="challenge-type">SAMPLE DECONSTRUCTION</div>
                             <h3 class="challenge-title">Vinyl Archaeology #12</h3>
@@ -61,16 +61,16 @@
                                 <span>🎵 1 RARE SAMPLE PROVIDED</span>
                             </div>
                             <div class="challenge-actions">
-                                <button class="btn-secondary jam-btn">
+                                <button class="btn-secondary jam-btn" onclick="event.stopPropagation()">
                                     👁️ PREVIEW
                                 </button>
-                                <button class="btn-secondary jam-btn" onclick="playChallengeSample()">
+                                <button class="btn-secondary jam-btn" onclick="event.stopPropagation(); playChallengeSample()">
                                     🔊 PLAY SAMPLE
                                 </button>
                             </div>
                         </div>
 
-                        <div class="challenge-card">
+                        <div class="challenge-card" onclick="openChallengeDetail('300-seconds', this)">
                             <div class="challenge-status active">● ACTIVE</div>
                             <div class="challenge-type">TIMED EXPERIMENT</div>
                             <h3 class="challenge-title">300 Seconds: No Edits</h3>
@@ -82,7 +82,7 @@
                                 <span>👥 567 ENTRIES</span>
                             </div>
                             <div class="challenge-actions">
-                                <button class="btn-primary jam-btn" onclick="startJam(5)">
+                                <button class="btn-primary jam-btn" onclick="event.stopPropagation(); startJam(5)">
                                     ▶ START JAMMING
                                 </button>
                             </div>
@@ -99,24 +99,29 @@
                 <section class="progress-overview">
                     <h2 class="section-title">YOUR PROGRESS</h2>
                     <div class="stats-grid">
-                        <div class="stat-card">
+                        <div class="stat-card" onclick="openProgressDetail('streak')">
                             <div class="stat-label">STREAK</div>
                             <div class="stat-value">3 <span class="stat-unit">days</span></div>
                         </div>
-                        <div class="stat-card">
+                        <div class="stat-card" onclick="openProgressDetail('loops')">
                             <div class="stat-label">LOOPS CREATED</div>
                             <div class="stat-value">12</div>
                         </div>
-                        <div class="stat-card">
+                        <div class="stat-card" onclick="openProgressDetail('time')">
                             <div class="stat-label">TIME SPENT</div>
                             <div class="stat-value">2h 30m</div>
                         </div>
-                        <div class="stat-card">
+                        <div class="stat-card" onclick="openProgressDetail('shared')">
                             <div class="stat-label">LOOPS SHARED</div>
                             <div class="stat-value">5</div>
                         </div>
                     </div>
                 </section>
+            </div>
+            
+            <!-- Floating Idea Roulette Button -->
+            <div class="idea-roulette-btn" onclick="spinIdeaRoulette()" title="Random Idea">
+                <div class="roulette-icon">⚡</div>
             </div>
         </div>
 
@@ -191,7 +196,7 @@
                 <section class="progress-meters">
                     <h2 class="section-title">ACTIVITY BREAKDOWN</h2>
                     
-                    <div class="progress-item">
+                    <div class="progress-item" onclick="openProgressDetail('jam-time')">
                         <div class="progress-header">
                             <span class="progress-label">JAM TIME THIS WEEK</span>
                             <span class="progress-value">2h 47m</span>
@@ -202,7 +207,7 @@
                         <div class="progress-subtext">GOAL: 4H • 73% COMPLETE</div>
                     </div>
 
-                    <div class="progress-item">
+                    <div class="progress-item" onclick="openProgressDetail('sound-packs')">
                         <div class="progress-header">
                             <span class="progress-label">SOUND PACKS EXPLORED</span>
                             <span class="progress-value">4/12</span>
@@ -213,7 +218,7 @@
                         <div class="progress-subtext">8 MORE TO UNLOCK ALL PACKS</div>
                     </div>
 
-                    <div class="progress-item">
+                    <div class="progress-item" onclick="openProgressDetail('avg-length')">
                         <div class="progress-header">
                             <span class="progress-label">AVG LOOP LENGTH</span>
                             <span class="progress-value">1:43</span>
@@ -224,7 +229,7 @@
                         <div class="progress-subtext">+0:15 LONGER THAN LAST WEEK</div>
                     </div>
 
-                    <div class="progress-item">
+                    <div class="progress-item" onclick="openProgressDetail('challenges')">
                         <div class="progress-header">
                             <span class="progress-label">CHALLENGE COMPLETION</span>
                             <span class="progress-value">8/12</span>
@@ -272,35 +277,35 @@
                 <section class="badges-section">
                     <h2 class="section-title">BADGES (5/12)</h2>
                     <div class="badges-grid">
-                        <div class="badge earned">
+                        <div class="badge earned" onclick="openBadgeDetail('quick-start')">
                             <div class="badge-icon">⚡</div>
                             <div class="badge-name">Quick Start</div>
                         </div>
-                        <div class="badge earned">
+                        <div class="badge earned" onclick="openBadgeDetail('first-loop')">
                             <div class="badge-icon">🎵</div>
                             <div class="badge-name">First Loop</div>
                         </div>
-                        <div class="badge earned">
+                        <div class="badge earned" onclick="openBadgeDetail('3-day-streak')">
                             <div class="badge-icon">🔥</div>
                             <div class="badge-name">3 Day Streak</div>
                         </div>
-                        <div class="badge earned">
+                        <div class="badge earned" onclick="openBadgeDetail('social-star')">
                             <div class="badge-icon">🎧</div>
                             <div class="badge-name">Social Star</div>
                         </div>
-                        <div class="badge earned">
+                        <div class="badge earned" onclick="openBadgeDetail('rising-artist')">
                             <div class="badge-icon">🌟</div>
                             <div class="badge-name">Rising Artist</div>
                         </div>
-                        <div class="badge locked">
+                        <div class="badge locked" onclick="openBadgeDetail('collaborator')">
                             <div class="badge-icon">👥</div>
                             <div class="badge-name">Collaborator</div>
                         </div>
-                        <div class="badge locked">
+                        <div class="badge locked" onclick="openBadgeDetail('challenge-master')">
                             <div class="badge-icon">🏆</div>
                             <div class="badge-name">Challenge Master</div>
                         </div>
-                        <div class="badge locked">
+                        <div class="badge locked" onclick="openBadgeDetail('pro-producer')">
                             <div class="badge-icon">💎</div>
                             <div class="badge-name">Pro Producer</div>
                         </div>
@@ -369,13 +374,13 @@
                         <span class="post-views">👁️ 3.2K PLAYS</span>
                     </div>
                     <div class="post-actions">
-                        <button class="action-btn">
-                            <span>❤️</span> 247
+                        <button class="action-btn" onclick="toggleLike(this, 247)">
+                            <span>❤️</span> <span class="like-count">247</span>
                         </button>
-                        <button class="action-btn">
-                            <span>💬</span> 18
+                        <button class="action-btn" onclick="openComments('post-1')">
+                            <span>💬</span> <span class="comment-count">18</span>
                         </button>
-                        <button class="action-btn remix">
+                        <button class="action-btn remix" onclick="startRemix('post-1')">
                             <span>🔄</span> REMIX
                         </button>
                     </div>
@@ -421,13 +426,13 @@
                         <span class="post-views">👁️ 1.8K PLAYS</span>
                     </div>
                     <div class="post-actions">
-                        <button class="action-btn">
-                            <span>❤️</span> 189
+                        <button class="action-btn" onclick="toggleLike(this, 189)">
+                            <span>❤️</span> <span class="like-count">189</span>
                         </button>
-                        <button class="action-btn">
-                            <span>💬</span> 12
+                        <button class="action-btn" onclick="openComments('post-2')">
+                            <span>💬</span> <span class="comment-count">12</span>
                         </button>
-                        <button class="action-btn remix">
+                        <button class="action-btn remix" onclick="startRemix('post-2')">
                             <span>🔄</span> REMIX
                         </button>
                     </div>
@@ -473,13 +478,13 @@
                         <span class="post-views">👁️ 5.1K PLAYS</span>
                     </div>
                     <div class="post-actions">
-                        <button class="action-btn">
-                            <span>❤️</span> 312
+                        <button class="action-btn" onclick="toggleLike(this, 312)">
+                            <span>❤️</span> <span class="like-count">312</span>
                         </button>
-                        <button class="action-btn">
-                            <span>💬</span> 24
+                        <button class="action-btn" onclick="openComments('post-3')">
+                            <span>💬</span> <span class="comment-count">24</span>
                         </button>
-                        <button class="action-btn remix">
+                        <button class="action-btn remix" onclick="startRemix('post-3')">
                             <span>🔄</span> REMIX
                         </button>
                     </div>
@@ -632,7 +637,7 @@
                     <div class="profile-avatar">YOU</div>
                     <div class="profile-name">@your_username</div>
                     <div class="profile-bio">Learning one beat at a time 🎵</div>
-                    <button class="btn-secondary profile-edit">EDIT PROFILE</button>
+                    <button class="btn-secondary profile-edit" onclick="openProfileEdit()">EDIT PROFILE</button>
                 </section>
 
                 <section class="profile-stats">
@@ -797,6 +802,304 @@
                 <span>PROFILE</span>
             </button>
         </nav>
+
+        <!-- Profile Edit Modal -->
+        <div id="profile-edit-modal" class="modal">
+            <div class="modal-content profile-edit-content">
+                <div class="modal-header">
+                    <h2>EDIT PROFILE</h2>
+                    <button class="close-btn" onclick="closeProfileEdit()">×</button>
+                </div>
+                <div class="profile-edit-body">
+                    <div class="profile-edit-avatar">
+                        <div class="avatar-preview" id="avatarPreview">YOU</div>
+                        <button class="btn-secondary btn-small" onclick="changeAvatar()">CHANGE AVATAR</button>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="editUsername">USERNAME</label>
+                        <input type="text" id="editUsername" value="@your_username" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="editBio">BIO</label>
+                        <textarea id="editBio" placeholder="Tell the community about yourself...">Learning one beat at a time 🎵</textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="editLocation">LOCATION</label>
+                        <input type="text" id="editLocation" placeholder="City, Country" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>GENRES</label>
+                        <div class="genre-tags">
+                            <span class="genre-tag active">Lofi</span>
+                            <span class="genre-tag">Ambient</span>
+                            <span class="genre-tag">Hip Hop</span>
+                            <span class="genre-tag">Electronic</span>
+                            <span class="genre-tag">Jazz</span>
+                            <span class="genre-tag">Experimental</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>PRIVACY SETTINGS</label>
+                        <div class="privacy-options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="publicProfile" checked />
+                                <span class="checkmark"></span>
+                                Make profile public
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="showActivity" checked />
+                                <span class="checkmark"></span>
+                                Show activity status
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="allowRemixes" checked />
+                                <span class="checkmark"></span>
+                                Allow others to remix my loops
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-edit-actions">
+                        <button class="btn-primary" onclick="saveProfile()">SAVE CHANGES</button>
+                        <button class="btn-secondary" onclick="closeProfileEdit()">CANCEL</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Detail Modal -->
+        <div id="progress-detail-modal" class="modal">
+            <div class="modal-content progress-detail-content">
+                <div class="modal-header">
+                    <h2 id="progress-detail-title">PROGRESS DETAILS</h2>
+                    <button class="close-btn" onclick="closeProgressDetail()">×</button>
+                </div>
+                <div class="progress-detail-body">
+                    <div class="progress-summary" id="progress-summary">
+                        <!-- Dynamic content based on selected metric -->
+                    </div>
+                    
+                    <div class="progress-chart" id="progress-chart">
+                        <!-- Chart visualization -->
+                    </div>
+                    
+                    <div class="progress-insights" id="progress-insights">
+                        <!-- Insights and recommendations -->
+                    </div>
+                    
+                    <div class="progress-actions">
+                        <button class="btn-primary" onclick="setGoal()">SET NEW GOAL</button>
+                        <button class="btn-secondary" onclick="shareProgress()">SHARE PROGRESS</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Badge Detail Modal -->
+        <div id="badge-detail-modal" class="modal">
+            <div class="modal-content badge-detail-content">
+                <div class="modal-header">
+                    <h2 id="badge-detail-title">BADGE DETAILS</h2>
+                    <button class="close-btn" onclick="closeBadgeDetail()">×</button>
+                </div>
+                <div class="badge-detail-body">
+                    <div class="badge-display" id="badge-display">
+                        <!-- Badge icon and info -->
+                    </div>
+                    
+                    <div class="badge-description" id="badge-description">
+                        <!-- Badge description -->
+                    </div>
+                    
+                    <div class="badge-requirements" id="badge-requirements">
+                        <!-- Requirements or progress -->
+                    </div>
+                    
+                    <div class="badge-actions" id="badge-actions">
+                        <!-- Action buttons -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comments Modal -->
+        <div id="comments-modal" class="modal">
+            <div class="modal-content comments-content">
+                <div class="modal-header">
+                    <h2>COMMENTS</h2>
+                    <button class="close-btn" onclick="closeComments()">×</button>
+                </div>
+                <div class="comments-body">
+                    <div class="post-summary">
+                        <div class="user-avatar small">K</div>
+                        <div class="post-info">
+                            <div class="username">@kai_beats</div>
+                            <div class="post-title">3AM Tape Hiss & Reverb Dreams</div>
+                        </div>
+                    </div>
+                    
+                    <div class="comments-list" id="commentsList">
+                        <div class="comment-item">
+                            <div class="user-avatar small">M</div>
+                            <div class="comment-content">
+                                <div class="comment-header">
+                                    <span class="username">@maya_music</span>
+                                    <span class="comment-time">2h ago</span>
+                                </div>
+                                <div class="comment-text">This is absolutely beautiful! The tape saturation is perfect 🔥</div>
+                                <div class="comment-actions">
+                                    <button class="comment-action" onclick="likeComment(this)">❤️ 12</button>
+                                    <button class="comment-action" onclick="replyToComment('comment-1')">Reply</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="comment-item">
+                            <div class="user-avatar small">R</div>
+                            <div class="comment-content">
+                                <div class="comment-header">
+                                    <span class="username">@rhythm_rider</span>
+                                    <span class="comment-time">3h ago</span>
+                                </div>
+                                <div class="comment-text">How did you get that reverb so lush? Amazing work!</div>
+                                <div class="comment-actions">
+                                    <button class="comment-action" onclick="likeComment(this)">❤️ 8</button>
+                                    <button class="comment-action" onclick="replyToComment('comment-2')">Reply</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="comment-item">
+                            <div class="user-avatar small">B</div>
+                            <div class="comment-content">
+                                <div class="comment-header">
+                                    <span class="username">@beat_wizard</span>
+                                    <span class="comment-time">4h ago</span>
+                                </div>
+                                <div class="comment-text">Remix incoming! This is too good not to flip 🔄</div>
+                                <div class="comment-actions">
+                                    <button class="comment-action" onclick="likeComment(this)">❤️ 15</button>
+                                    <button class="comment-action" onclick="replyToComment('comment-3')">Reply</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="add-comment">
+                        <div class="comment-input-group">
+                            <div class="user-avatar small you">Y</div>
+                            <textarea id="newComment" placeholder="Add a comment..." rows="2"></textarea>
+                            <button class="btn-primary btn-small" onclick="postComment()">POST</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Idea Roulette Modal -->
+        <div id="idea-roulette-modal" class="modal">
+            <div class="modal-content idea-roulette-content">
+                <div class="modal-header">
+                    <h2>YOUR SAVED IDEAS</h2>
+                    <button class="close-btn" onclick="closeIdeaRoulette()">×</button>
+                </div>
+                <div class="roulette-body">
+                    <div class="dice-container">
+                        <div class="dice" id="rouletteDice">
+                            <div class="dice-face">🎲</div>
+                        </div>
+                    </div>
+                    
+                    <div class="roulette-result" id="rouletteResult">
+                        <!-- Dynamic content will be inserted here -->
+                    </div>
+                    
+                    <div class="roulette-actions">
+                        <button class="btn-primary" id="startJamBtn" onclick="startRouletteJam()">START JAM SESSION</button>
+                        <button class="btn-secondary" onclick="spinIdeaRoulette()">SPIN AGAIN</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Challenge Detail Modal -->
+        <div id="challenge-detail-modal" class="modal">
+            <div class="modal-content challenge-detail-content">
+                <div class="modal-header">
+                    <h2 id="challenge-detail-title">CHALLENGE DETAILS</h2>
+                    <button class="close-btn" onclick="closeChallengeDetail()">×</button>
+                </div>
+                <div class="challenge-detail-body">
+                    <div class="challenge-status-bar" id="challenge-detail-status">
+                        <span class="status-indicator" id="challenge-detail-status-indicator">●</span>
+                        <span class="status-text" id="challenge-detail-status-text">ACTIVE</span>
+                    </div>
+                    <div class="challenge-type-badge" id="challenge-detail-type">SOUND PACK EXPLORATION</div>
+                    <h3 class="challenge-detail-title" id="challenge-detail-name">Analog Drift Vol.3</h3>
+                    <p class="challenge-detail-description" id="challenge-detail-description">
+                        Build a 16-bar loop using tape-saturated samples from the Analog Drift collection. Minimum 3 layers.
+                    </p>
+                    
+                    <div class="challenge-stats-detailed">
+                        <div class="stat-item">
+                            <div class="stat-value" id="challenge-detail-time">2 DAYS LEFT</div>
+                            <div class="stat-label">TIME REMAINING</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="challenge-detail-participants">342</div>
+                            <div class="stat-label">PARTICIPANTS</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="challenge-detail-submissions">289</div>
+                            <div class="stat-label">SUBMISSIONS</div>
+                        </div>
+                    </div>
+
+                    <div class="challenge-requirements">
+                        <h4>REQUIREMENTS</h4>
+                        <ul id="challenge-detail-requirements">
+                            <li>Use samples from Analog Drift collection only</li>
+                            <li>Minimum 3 layers required</li>
+                            <li>Loop must be exactly 16 bars</li>
+                            <li>Include tape saturation effects</li>
+                        </ul>
+                    </div>
+
+                    <div class="challenge-examples">
+                        <h4>EXAMPLE ENTRIES</h4>
+                        <div class="example-grid">
+                            <div class="example-item">
+                                <div class="example-avatar">K</div>
+                                <div class="example-info">
+                                    <div class="example-username">@kai_beats</div>
+                                    <div class="example-title">Tape Hiss Dreams</div>
+                                    <div class="example-stats">❤️ 247 • 🔄 18</div>
+                                </div>
+                            </div>
+                            <div class="example-item">
+                                <div class="example-avatar">M</div>
+                                <div class="example-info">
+                                    <div class="example-username">@maya_music</div>
+                                    <div class="example-title">Vintage Vibes</div>
+                                    <div class="example-stats">❤️ 189 • 🔄 12</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="challenge-actions-detailed">
+                        <button class="btn-primary" id="join-challenge-btn" onclick="joinChallenge()">JOIN CHALLENGE</button>
+                        <button class="btn-secondary" onclick="viewAllSubmissions()">VIEW ALL SUBMISSIONS</button>
+                        <button class="btn-secondary" onclick="playChallengeSample()">🔊 PLAY SAMPLE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Jam Modal -->
         <div id="jam-modal" class="modal">
